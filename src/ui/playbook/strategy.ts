@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { GrenadeName } from 'csdm/common/types/counter-strike';
 
-export const maxSeconds = 120;
+import { maxSeconds } from './timeline-limit';
+import { timedDrawingSchema, maxStrokes } from './drawings';
+import { poseSchema } from './lineup-position';
 export const mediaTypes = ['image/png', 'image/jpeg', 'image/webp', 'video/mp4', 'video/webm'] as const;
 export const maxMediaBytes = 32 * 1024 * 1024;
 export const grenades = [
@@ -32,6 +34,7 @@ export const lineupSchema = z.object({
   player: z.number().int().min(0).max(4),
   time: timeSchema,
   instructions: note,
+  pose: poseSchema.optional(),
   source: z
     .object({
       checksum: z.string().max(128),
@@ -50,6 +53,11 @@ export const strategySchema = z.object({
   tags: name,
   notes: note,
   players: z.array(z.object({ name, instructions: note, route: routeSchema })).length(5),
+  drawings: z
+    .array(timedDrawingSchema)
+    .max(maxStrokes)
+    .refine((items) => new Set(items.map((item) => item.id)).size === items.length)
+    .optional(),
   lineups: z
     .array(lineupSchema)
     .max(256)
@@ -94,5 +102,10 @@ export function positionAt(route: Frame[], time: number): Point {
 }
 
 export function durationOf(strategy: Strategy) {
-  return Math.max(5, ...strategy.players.map((p) => p.route.at(-1)!.time), ...strategy.lineups.map((l) => l.time + 2));
+  return Math.max(
+    5,
+    ...(strategy.drawings ?? []).map((d) => d.end),
+    ...strategy.players.map((p) => p.route.at(-1)!.time),
+    ...strategy.lineups.map((l) => l.time + 2),
+  );
 }

@@ -1,7 +1,6 @@
 import type { Map } from 'csdm/common/types/map';
 import type { GrenadeThrow, Coordinates } from 'csdm/common/types/grenade-throw';
-import { getScaledCoordinateX } from 'csdm/ui/maps/get-scaled-coordinate-x';
-import { getScaledCoordinateY } from 'csdm/ui/maps/get-scaled-coordinate-y';
+import { projectPosition } from './lineup-position';
 import { grenades, type Point, type Lineup } from './strategy';
 
 export function lineupFromDemo(map: Map, throwData: GrenadeThrow, checksum: string): Lineup | undefined {
@@ -9,11 +8,8 @@ export function lineupFromDemo(map: Map, throwData: GrenadeThrow, checksum: stri
   if (!last || !grenades.some((kind) => kind === throwData.grenadeName)) return;
   function project(p: Coordinates): Point {
     const clamp = (n: number) => Math.min(1000, Math.max(0, Math.round(n)));
-    return {
-      x: clamp(getScaledCoordinateX(map, 1000, p.x)),
-      y: clamp(getScaledCoordinateY(map, 1000, p.y)),
-      floor: map.lowerRadarFilePath && p.z < map.thresholdZ ? 'lower' : 'upper',
-    };
+    const point = projectPosition(map, p);
+    return { ...point, x: clamp(point.x), y: clamp(point.y) };
   }
   return {
     id: crypto.randomUUID(),

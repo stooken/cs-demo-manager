@@ -9,7 +9,7 @@ const mediaSchema = z.object({
 const portableLineup = lineupSchema.extend({ media: z.array(mediaSchema).max(8) });
 const fileSchema = z.object({
   format: z.literal('csdm-playbook'),
-  version: z.literal(1),
+  version: z.union([z.literal(1), z.literal(2)]),
   strategy: strategySchema.extend({ lineups: z.array(portableLineup).max(256) }),
 });
 
@@ -33,7 +33,8 @@ export async function serializeStrategy(strategy: Strategy) {
       ),
     })),
   );
-  return JSON.stringify({ format: 'csdm-playbook', version: 1, strategy: { ...strategy, lineups } });
+  const version = strategy.drawings?.length || lineups.some((l) => l.pose) ? 2 : 1;
+  return JSON.stringify({ format: 'csdm-playbook', version, strategy: { ...strategy, lineups } });
 }
 
 export function importStrategy(text: string): Strategy {

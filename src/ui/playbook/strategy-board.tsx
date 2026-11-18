@@ -1,3 +1,5 @@
+import { DrawingLayer } from './drawing-layer';
+import { visibleAt, type Pen, type Stroke } from './drawings';
 import React, { useRef, useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { getGrenadeImagePath } from 'csdm/ui/shared/get-grenade-image-path';
@@ -21,6 +23,10 @@ type Props = {
   selectedLineup: string | undefined;
   placing: boolean;
   origin: Point | undefined;
+  pen: Pen | undefined;
+  penColor: Stroke['color'];
+  coaching: Stroke[];
+  onStroke: (stroke: Stroke) => void;
   onPlace: (point: Point) => void;
   onMove: (index: number, point: Point) => void;
   onPlayer: (index: number) => void;
@@ -38,6 +44,10 @@ export function StrategyBoard({
   selectedLineup,
   placing,
   origin,
+  pen,
+  penColor,
+  coaching,
+  onStroke,
   onPlace,
   onMove,
   onPlayer,
@@ -155,6 +165,12 @@ export function StrategyBoard({
                 {lineup.from.floor === floor && lineup.to.floor === floor && (
                   <line x1={lineup.from.x} y1={lineup.from.y} x2={lineup.to.x} y2={lineup.to.y} strokeDasharray="8 7" />
                 )}
+                {lineup.pose && lineup.id === selectedLineup && lineup.from.floor === floor && (
+                  <path
+                    d="M12 0h22l-6 -4m6 4-6 4"
+                    transform={`translate(${lineup.from.x} ${lineup.from.y}) rotate(${-lineup.pose.yaw})`}
+                  />
+                )}
                 {lineup.from.floor === floor && <circle cx={lineup.from.x} cy={lineup.from.y} r="12" fill="black" />}
                 {active && travel < 1 && lineup.from.floor === floor && lineup.to.floor === floor && (
                   <circle
@@ -196,6 +212,15 @@ export function StrategyBoard({
               </g>
             );
           })}
+          <DrawingLayer
+            floor={floor}
+            pen={pen}
+            color={penColor}
+            onStroke={onStroke}
+            pointAt={pointAt}
+            timed={(strategy.drawings ?? []).filter((d) => d.floor === floor && visibleAt(d, time))}
+            coaching={coaching.filter((d) => d.floor === floor)}
+          />
           {origin?.floor === floor && (
             <circle cx={origin.x} cy={origin.y} r="10" fill="none" stroke="white" strokeWidth="4" />
           )}

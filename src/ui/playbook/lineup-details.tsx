@@ -1,3 +1,7 @@
+import { formatGetpos } from './lineup-position';
+import { useClipboard } from 'csdm/ui/hooks/use-clipboard';
+import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
+import { maxSeconds } from './timeline-limit';
 import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Link } from 'react-router';
@@ -5,7 +9,7 @@ import { buildMatchRoundPath } from 'csdm/ui/routes-paths';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { Field, fieldClassName } from './fields';
 import { LineupMedia } from './lineup-media';
-import { grenades, maxSeconds, type Lineup, type Strategy } from './strategy';
+import { grenades, type Lineup, type Strategy } from './strategy';
 
 type Props = {
   lineup: Lineup;
@@ -17,6 +21,7 @@ type Props = {
   changeLineup: (values: Partial<Lineup>) => void;
   onPlace: (mode: 'move-from' | 'move-to') => void;
   onDelete: () => void;
+  onGetpos: (() => void) | undefined;
 };
 export function LineupDetails({
   lineup,
@@ -28,8 +33,11 @@ export function LineupDetails({
   changeLineup,
   onPlace,
   onDelete,
+  onGetpos,
 }: Props) {
   const { t } = useLingui();
+  const { copyToClipboard } = useClipboard();
+  const toast = useShowToast();
   const { round, tick } = lineup.source ?? {};
   return (
     <>
@@ -37,9 +45,22 @@ export function LineupDetails({
         <h3 className="min-w-0 flex-1 truncate text-subtitle">{lineup.title || kindNames[lineup.kind]}</h3>
         <Button onClick={() => onEdit(!editing)}>{editing ? t`Preview` : t`Edit lineup`}</Button>
       </div>
+      {lineup.pose && (
+        <Button
+          onClick={async () => {
+            if (!lineup.pose) return;
+            try {
+              await copyToClipboard(formatGetpos(lineup.pose));
+            } catch {
+              toast({ type: 'error', content: t`Could not copy the practice command.` });
+            }
+          }}
+        >
+          <Trans>Copy practice command</Trans>
+        </Button>
+      )}
       {editing ? (
         <>
-          {' '}
           <Field label={t`Lineup name`} value={lineup.title} onChange={(title) => changeLineup({ title })} />
           <label>
             {t`Utility`}
@@ -85,13 +106,22 @@ export function LineupDetails({
             />
           </label>
           <div className="flex flex-wrap gap-4">
-            <Button
-              onClick={() => {
-                onPlace('move-from');
-              }}
-            >
-              <Trans>Move throw</Trans>
+            <Button isDisabled={!onGetpos} onClick={onGetpos}>
+              {lineup.pose ? t`Replace getpos` : t`Set from getpos`}
             </Button>
+            {lineup.pose ? (
+              <Button onClick={() => changeLineup({ pose: undefined })}>
+                <Trans>Detach getpos</Trans>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  onPlace('move-from');
+                }}
+              >
+                <Trans>Move throw</Trans>
+              </Button>
+            )}
             <Button
               onClick={() => {
                 onPlace('move-to');

@@ -1583,11 +1583,13 @@ msgid "Players"
 msgstr "Players"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
+#: src/ui/playbook/drawing-tools.tsx
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Upper"
 msgstr "Upper"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
+#: src/ui/playbook/drawing-tools.tsx
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Lower"
 msgstr "Lower"
@@ -6607,6 +6609,117 @@ msgstr "No match found yet, you have to analyze demos to generate matches."
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
 msgstr "{0, plural, one {# match selected} other {# matches selected}}"
 
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Show at (s)"
+msgstr "Show at (s)"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Hide at (s)"
+msgstr "Hide at (s)"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Choose a start before the end, between 0 and 120 seconds."
+msgstr "Choose a start before the end, between 0 and 120 seconds."
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Apply timing"
+msgstr "Apply timing"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Ink color"
+msgstr "Ink color"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Yellow"
+msgstr "Yellow"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Red"
+msgstr "Red"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Blue"
+msgstr "Blue"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "White"
+msgstr "White"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Coaching pen"
+msgstr "Coaching pen"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Draw while you talk. Coaching ink clears when you leave this strategy."
+msgstr "Draw while you talk. Coaching ink clears when you leave this strategy."
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Undo last stroke"
+msgstr "Undo last stroke"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Clear coaching ink"
+msgstr "Clear coaching ink"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Timed pen"
+msgstr "Timed pen"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Draw at the playhead. Adjust when each stroke appears and disappears below."
+msgstr "Draw at the playhead. Adjust when each stroke appears and disappears below."
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Stroke {number}"
+msgstr "Stroke {number}"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "{start}–{end}s"
+msgstr "{start}–{end}s"
+
+#: src/ui/playbook/drawing-tools.tsx
+msgid "Remove stroke"
+msgstr "Remove stroke"
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Lineup from getpos"
+msgstr "Lineup from getpos"
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Stand and aim in CS2 on {mapName}. Run getpos in the console and paste its output here."
+msgstr "Stand and aim in CS2 on {mapName}. Run getpos in the console and paste its output here."
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Console output"
+msgstr "Console output"
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Paste one setpos and setang pair. The getpos prompt and its repeated output are accepted."
+msgstr "Paste one setpos and setang pair. The getpos prompt and its repeated output are accepted."
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "This position falls outside the {mapName} radar. Check the map and coordinates."
+msgstr "This position falls outside the {mapName} radar. Check the map and coordinates."
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Paste into the console output field with your keyboard."
+msgstr "Paste into the console output field with your keyboard."
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Paste from clipboard"
+msgstr "Paste from clipboard"
+
+#: src/ui/playbook/getpos-dialog.tsx
+msgid "Use position"
+msgstr "Use position"
+
+#: src/ui/playbook/getpos-dialog.tsx
+#: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
 #: src/ui/playbook/lineup-details.tsx
 msgid "Preview"
 msgstr "Preview"
@@ -6614,6 +6727,14 @@ msgstr "Preview"
 #: src/ui/playbook/lineup-details.tsx
 msgid "Edit lineup"
 msgstr "Edit lineup"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Could not copy the practice command."
+msgstr "Could not copy the practice command."
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Copy practice command"
+msgstr "Copy practice command"
 
 #: src/ui/playbook/lineup-details.tsx
 msgid "Lineup name"
@@ -6630,6 +6751,18 @@ msgstr "Thrower"
 #: src/ui/playbook/lineup-details.tsx
 msgid "Throw at (seconds)"
 msgstr "Throw at (seconds)"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Replace getpos"
+msgstr "Replace getpos"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Set from getpos"
+msgstr "Set from getpos"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Detach getpos"
+msgstr "Detach getpos"
 
 #: src/ui/playbook/lineup-details.tsx
 msgid "Move throw"
@@ -6696,14 +6829,8 @@ msgid "Create strategy"
 msgstr "Create strategy"
 
 #: src/ui/playbook/playbook.tsx
-#: src/ui/playbook/save-demo-lineup-dialog.tsx
-#: src/ui/playbook/strategy-editor.tsx
-msgid "Cancel"
-msgstr "Cancel"
-
-#: src/ui/playbook/playbook.tsx
-msgid "Could not import this file. Choose a version 1 Playbook JSON file under 64 MiB."
-msgstr "Could not import this file. Choose a version 1 Playbook JSON file under 64 MiB."
+msgid "Could not import this file. Choose a supported Playbook JSON file under 64 MiB."
+msgstr "Could not import this file. Choose a supported Playbook JSON file under 64 MiB."
 
 #: src/ui/playbook/playbook.tsx
 msgid "Saved locally"
@@ -6848,12 +6975,24 @@ msgid "Could not export this strategy."
 msgstr "Could not export this strategy."
 
 #: src/ui/playbook/strategy-editor.tsx
+msgid "Choose a pen or select a stroke to edit its timing."
+msgstr "Choose a pen or select a stroke to edit its timing."
+
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Click a throw or landing marker to view its lineup."
 msgstr "Click a throw or landing marker to view its lineup."
 
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Drag a player to set their position at the current time."
 msgstr "Drag a player to set their position at the current time."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Drag on the radar to sketch. Press Esc to put the pen down."
+msgstr "Drag on the radar to sketch. Press Esc to put the pen down."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Drag on the radar to add a timed stroke."
+msgstr "Drag on the radar to add a timed stroke."
 
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Click each waypoint in order. Each step adds two seconds."
@@ -6920,6 +7059,10 @@ msgid "Lineups"
 msgstr "Lineups"
 
 #: src/ui/playbook/strategy-editor.tsx
+msgid "Drawings"
+msgstr "Drawings"
+
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Player name"
 msgstr "Player name"
 
@@ -6970,6 +7113,10 @@ msgstr "Delete lineup?"
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Place lineup"
 msgstr "Place lineup"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Place from getpos"
+msgstr "Place from getpos"
 
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Reuse lineup"

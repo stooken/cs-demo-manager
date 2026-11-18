@@ -124,7 +124,7 @@ export function Playbook() {
       if (file.size > 64 * 1024 * 1024) throw new Error('File too large');
       create(importStrategy(await file.text()));
     } catch {
-      setError(t`Could not import this file. Choose a version 1 Playbook JSON file under 64 MiB.`);
+      setError(t`Could not import this file. Choose a supported Playbook JSON file under 64 MiB.`);
     }
   }
   return (

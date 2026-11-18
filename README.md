@@ -10,6 +10,8 @@ Open the book icon in the left sidebar, choose **New strategy**, and select a CS
 
 - **Players** lets you name each slot, write its assignment and drag the player to a starting position. Choose **Draw route** to add waypoints. Edit their arrival times or add a wait, then use the timeline to play or scrub the sequence.
 - **Lineups** lets you mark where to stand and where the utility lands. Assign the throw to a player and a time, add instructions, and attach screenshots or short MP4/WebM clips. Click either marker to see the lineup. On multi-level maps you can switch floors between placing the two markers.
+- **Drawings → Coaching pen** gives you a temporary layer to sketch on while talking or playing the sequence. Undo the last stroke or clear the layer. **Timed pen** saves strokes on the current floor. Each starts at the playhead and shows for five seconds by default, with editable show and hide times. Timed strokes travel with an exported strategy.
+- **Lineups → Place from getpos** accepts the output of CS2’s `getpos` and `getpos_exact` commands, including the echoed prompt. Playbook places the throw marker on the radar and you click the landing spot. Choose **Copy practice command** on the lineup and paste it into the CS2 practice console to return to the recorded position and aim. Use **Set from getpos** when editing an existing lineup.
 - In a CS2 match’s **Grenades → Finder**, right-click a throw and choose **Save to Playbook**. Choose a strategy on that map or create one. The lineup links back to the source round and records its demo tick.
 - Use **Export** to share a strategy or back it up. **Import** creates a separate copy, including its attachments. You can also copy an individual lineup between strategies on the same map.
 

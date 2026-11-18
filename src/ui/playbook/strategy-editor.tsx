@@ -1,3 +1,9 @@
+import { DrawingTools } from './drawing-tools';
+import { drawingInterval, maxStrokes, type Stroke, type TimedDrawing, type Pen } from './drawings';
+import { GetposDialog } from './getpos-dialog';
+import type { LineupPose } from './lineup-position';
+import { useMaps } from 'csdm/ui/maps/use-maps';
+import { maxSeconds } from './timeline-limit';
 import React, { useEffect, useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -10,7 +16,6 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { deleteStrategy, saveStrategy } from './library';
 import {
   durationOf,
-  maxSeconds,
   placeFrame,
   positionAt,
   type Lineup,
@@ -31,14 +36,21 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
   const toast = useShowToast();
   const getRadar = useGetMapRadarSrc();
   const initial = strategy.lineups.find((l) => l.id === initialLineup);
-  const [tab, setTab] = useState<'players' | 'lineups' | 'strategy'>(initial ? 'lineups' : 'players');
+  const [tab, setTab] = useState<'players' | 'lineups' | 'drawings' | 'strategy'>(initial ? 'lineups' : 'players');
   const [player, setPlayer] = useState(initial?.player ?? 0);
   const [selectedId, select] = useState<string | undefined>(initial?.id);
-  const [mode, setMode] = useState<'select' | 'route' | 'position' | 'throw' | 'landing' | 'move-from' | 'move-to'>(
-    'select',
-  );
+  const [mode, setMode] = useState<
+    'select' | 'route' | 'position' | 'throw' | 'landing' | 'move-from' | 'move-to' | Pen
+  >('select');
   const [editingLineup, setEditingLineup] = useState(false);
   const [origin, setOrigin] = useState<Point>();
+  const [originPose, setOriginPose] = useState<LineupPose>();
+  const [coaching, setCoaching] = useState<Stroke[]>([]);
+  const [color, setColor] = useState<Stroke['color']>('yellow');
+  const [selectedDrawing, setSelectedDrawing] = useState<string>();
+  const drawings = strategy.drawings ?? [];
+  const pen = mode === 'coaching' || mode === 'timed' ? mode : undefined;
+  const map = useMaps().find((m) => m.name === strategy.map && m.game === Game.CS2);
   const [floor, setFloor] = useState<Point['floor']>(initial?.from.floor ?? 'upper');
   const [time, setTime] = useState(initial?.time ?? 0);
   const [playFrom, setPlayFrom] = useState<number | null>(null);
@@ -76,6 +88,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
   function resetTool() {
     setMode('select');
     setOrigin(undefined);
+    setOriginPose(undefined);
     setPlayFrom(null);
   }
   useEffect(() => {
@@ -83,6 +96,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
     const cancelPlacement = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setOrigin(undefined);
+        setOriginPose(undefined);
         setMode('select');
       }
     };
@@ -113,6 +127,45 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
     change({ lineups: [...strategy.lineups, l] });
     inspect(l, true);
   }
+  function choosePose(existing?: Lineup) {
+    if (!map) return;
+    resetTool();
+    showDialog(
+      <GetposDialog
+        map={map}
+        onApply={(pose, from) => {
+          setFloor(from.floor);
+          if (existing) {
+            change({
+              lineups: strategy.lineups.map((item) => (item.id === existing.id ? { ...item, pose, from } : item)),
+            });
+          } else {
+            setOrigin(from);
+            setOriginPose(pose);
+            setMode('landing');
+          }
+        }}
+      />,
+    );
+  }
+  function selectDrawing(d: TimedDrawing) {
+    resetTool();
+    setSelectedDrawing(d.id);
+    setFloor(d.floor);
+    setTime(d.start);
+  }
+  function finishStroke(stroke: Stroke) {
+    if (pen === 'coaching' && coaching.length < maxStrokes) {
+      setCoaching([...coaching, stroke]);
+      if (coaching.length + 1 === maxStrokes) setMode('select');
+    } else if (pen === 'timed' && drawings.length < maxStrokes) {
+      const drawing = { ...stroke, ...drawingInterval(time) };
+      change({ drawings: [...drawings, drawing] });
+      setTime(drawing.start);
+      setSelectedDrawing(drawing.id);
+      if (drawings.length + 1 === maxStrokes) setMode('select');
+    }
+  }
   function move(index: number, point: Point, seconds: number) {
     const at = Math.min(maxSeconds, Math.round(seconds));
     updatePlayer(index, { route: placeFrame(strategy.players[index].route, point, at) });
@@ -139,6 +192,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
             title: t`New lineup`,
             kind: GrenadeName.Smoke,
             from: origin,
+            pose: originPose,
             to: point,
             player,
             time: Math.min(maxSeconds, Math.round(time)),
@@ -189,9 +243,13 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
   }
   const help = {
     select:
-      tab === 'lineups'
-        ? t`Click a throw or landing marker to view its lineup.`
-        : t`Drag a player to set their position at the current time.`,
+      tab === 'drawings'
+        ? t`Choose a pen or select a stroke to edit its timing.`
+        : tab === 'lineups'
+          ? t`Click a throw or landing marker to view its lineup.`
+          : t`Drag a player to set their position at the current time.`,
+    coaching: t`Drag on the radar to sketch. Press Esc to put the pen down.`,
+    timed: t`Drag on the radar to add a timed stroke.`,
     route: t`Click each waypoint in order. Each step adds two seconds.`,
     position: t`Click the player’s position at the current time.`,
     throw: t`Click where the player stands to throw.`,
@@ -228,7 +286,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
               </select>
             )}
             <span className="flex-1">{playing ? t`Playing strategy` : help[mode]}</span>
-            {mode !== 'select' && <Button onClick={resetTool}>{mode === 'route' ? t`Done` : t`Cancel`}</Button>}
+            {mode !== 'select' && <Button onClick={resetTool}>{mode === 'route' || pen ? t`Done` : t`Cancel`}</Button>}
           </div>
           <StrategyBoard
             strategy={strategy}
@@ -240,6 +298,10 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
             placing={mode !== 'select'}
             selectedLineup={selectedId}
             origin={origin}
+            pen={pen}
+            penColor={color}
+            coaching={coaching}
+            onStroke={finishStroke}
             onPlace={place}
             onPlayer={(index) => {
               setPlayer(index);
@@ -255,7 +317,8 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
             <Button
               variant={ButtonVariant.Primary}
               onClick={() => {
-                resetTool();
+                if (mode !== 'coaching') resetTool();
+                else setPlayFrom(null);
                 if (!playing) setPlayFrom(time >= duration ? 0 : time);
               }}
             >
@@ -293,6 +356,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
               [
                 ['players', t`Players`],
                 ['lineups', t`Lineups`],
+                ['drawings', t`Drawings`],
                 ['strategy', t`Strategy`],
               ] as const
             ).map(([value, label]) => (
@@ -429,6 +493,23 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
                 </div>
               </>
             )}
+            {tab === 'drawings' && (
+              <DrawingTools
+                pen={pen}
+                color={color}
+                onColor={setColor}
+                coaching={coaching}
+                onCoaching={setCoaching}
+                drawings={drawings}
+                onDrawings={(items) => change({ drawings: items })}
+                selected={selectedDrawing}
+                onSelect={selectDrawing}
+                onPen={(next) => {
+                  if (next === 'timed') setPlayFrom(null);
+                  setMode(next === pen ? 'select' : next);
+                }}
+              />
+            )}
             {tab === 'lineups' && (
               <>
                 {lineup && (
@@ -444,6 +525,7 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
                     totalMedia={totalMedia}
                     kindNames={kindNames}
                     changeLineup={changeLineup}
+                    onGetpos={map ? () => choosePose(lineup) : undefined}
                     onPlace={(next) => {
                       resetTool();
                       setMode(next);
@@ -466,6 +548,9 @@ export function StrategyEditor({ strategy, library, initialLineup, back }: Props
                   }}
                 >
                   <Trans>Place lineup</Trans>
+                </Button>
+                <Button isDisabled={!map || strategy.lineups.length >= 256} onClick={() => choosePose()}>
+                  <Trans>Place from getpos</Trans>
                 </Button>
                 {reusable.length > 0 && (
                   <select

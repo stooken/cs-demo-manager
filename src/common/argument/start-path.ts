@@ -7,5 +7,6 @@ export const StartPath = {
   Search: 'search',
   Settings: 'settings',
   Teams: 'teams',
+  Playbook: 'playbook',
 } as const;
 export type StartPath = (typeof StartPath)[keyof typeof StartPath];

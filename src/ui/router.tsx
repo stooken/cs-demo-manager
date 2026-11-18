@@ -8,6 +8,7 @@ import { Analyses } from 'csdm/ui/analyses/analyses';
 import { DemoLoader } from 'csdm/ui/demo/demo-loader';
 import { PlayerMaps } from 'csdm/ui/player/maps/player-maps';
 import { Players } from 'csdm/ui/players/players';
+import { Playbook } from 'csdm/ui/playbook/playbook';
 import { Player } from 'csdm/ui/player/player';
 import { PinnedPlayer } from 'csdm/ui/player/pinned-player';
 import { PlayerOverview } from 'csdm/ui/player/overview/player-overview';
@@ -90,6 +91,7 @@ export const router = createHashRouter(
       <Route path={RoutePath.Demos} element={<Demos />} />
       <Route path={`${RoutePath.Demos}/:path`} element={<DemoLoader />} />
       <Route path={RoutePath.Players} element={<Players />} />
+      <Route path={RoutePath.Playbook} element={<Playbook />} />
       <Route path={`${RoutePath.Players}/:steamId`} element={<Player />}>
         <Route index={true} element={<PlayerOverview />} />
         <Route path={RoutePath.PlayerCharts} element={<PlayerCharts />} />

@@ -5,6 +5,11 @@ import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import type { GrenadeThrow } from 'csdm/common/types/grenade-throw';
 import { useCurrentMatch } from '../../use-current-match';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
+import { Game, TeamNumber } from 'csdm/common/types/counter-strike';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { useCurrentMatchMap } from 'csdm/ui/match/use-current-match-map';
+import { lineupFromDemo } from 'csdm/ui/playbook/demo-lineup';
+import { SaveDemoLineupDialog } from 'csdm/ui/playbook/save-demo-lineup-dialog';
 
 type Props = {
   grenadeThrow: GrenadeThrow | undefined;
@@ -13,6 +18,10 @@ type Props = {
 
 export function GrenadesFinderContextMenu({ grenadeThrow, onWatchClick }: Props) {
   const match = useCurrentMatch();
+  const map = useCurrentMatchMap();
+  const { showDialog } = useDialog();
+  const lineup =
+    map && grenadeThrow && match.game === Game.CS2 ? lineupFromDemo(map, grenadeThrow, match.checksum) : undefined;
   const onCopyPositionClick = async () => {
     if (grenadeThrow === undefined || grenadeThrow.positions.length === 0) {
       return;
@@ -25,6 +34,21 @@ export function GrenadesFinderContextMenu({ grenadeThrow, onWatchClick }: Props)
 
   return (
     <ContextMenu>
+      {lineup && grenadeThrow && (
+        <ContextMenuItem
+          onClick={() =>
+            showDialog(
+              <SaveDemoLineupDialog
+                lineup={lineup}
+                map={match.mapName}
+                side={grenadeThrow.throwerSide === TeamNumber.CT ? 'CT' : 'T'}
+              />,
+            )
+          }
+        >
+          <Trans>Save to Playbook</Trans>
+        </ContextMenuItem>
+      )}
       <ContextMenuItem onClick={onCopyPositionClick}>
         {<Trans context="Context menu">Copy position</Trans>}
       </ContextMenuItem>

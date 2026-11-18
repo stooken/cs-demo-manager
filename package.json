@@ -13,14 +13,14 @@
   ],
   "homepage": "https://cs-demo-manager.com",
   "bugs": {
-    "url": "https://github.com/akiver/cs-demo-manager/issues"
+    "url": "https://github.com/stooken/cs-demo-manager/issues"
   },
   "license": "MIT",
   "author": {
     "name": "AkiVer",
     "email": "ys.renaud@gmail.com"
   },
-  "repository": "https://github.com/akiver/cs-demo-manager",
+  "repository": "https://github.com/stooken/cs-demo-manager",
   "main": "main.js",
   "scripts": {
     "build": "node ./scripts/build.mjs",
@@ -136,7 +136,8 @@
     "vite-plus": "1.5.1",
     "vitest": "catalog:",
     "wavesurfer.js": "8.0.5",
-    "ws": "8.22.0"
+    "ws": "8.22.0",
+    "zod": "4.6.5"
   },
   "devEngines": {
     "runtime": {

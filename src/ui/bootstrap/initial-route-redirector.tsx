@@ -45,6 +45,9 @@ export function InitialRouteRedirector() {
         case StartPath.Search:
           to = RoutePath.Search;
           break;
+        case StartPath.Playbook:
+          to = RoutePath.Playbook;
+          break;
         case StartPath.Teams:
           to = RoutePath.Teams;
           break;
@@ -59,6 +62,9 @@ export function InitialRouteRedirector() {
           break;
         case Page.Players:
           to = RoutePath.Players;
+          break;
+        case Page.Playbook:
+          to = RoutePath.Playbook;
           break;
         case Page.Teams:
           to = RoutePath.Teams;

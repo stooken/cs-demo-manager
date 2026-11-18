@@ -1583,10 +1583,12 @@ msgid "Players"
 msgstr "Players"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Upper"
 msgstr "Upper"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Lower"
 msgstr "Lower"
 
@@ -3007,6 +3009,7 @@ msgstr "Unknown"
 
 #: src/ui/dialogs/tags-dialog.tsx
 #: src/ui/match/rounds/overview/rounds-history.tsx
+#: src/ui/playbook/strategy-editor.tsx
 #: src/ui/settings/settings-tabs.tsx
 msgid "Tags"
 msgstr "Tags"
@@ -3874,6 +3877,12 @@ msgctxt "Tooltip"
 msgid "Pinned player"
 msgstr "Pinned player"
 
+#: src/ui/left-bar/playbook-link.tsx
+#: src/ui/playbook/playbook.tsx
+#: src/ui/settings/ui/initial-page-select.tsx
+msgid "Playbook"
+msgstr "Playbook"
+
 #: src/ui/left-bar/players-link.tsx
 msgctxt "Tooltip"
 msgid "Players"
@@ -4178,6 +4187,11 @@ msgstr "Winner"
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr "Equipment value"
+
+#: src/ui/match/grenades/finder/context-menu.tsx
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+msgid "Save to Playbook"
+msgstr "Save to Playbook"
 
 #: src/ui/match/grenades/finder/context-menu.tsx
 msgctxt "Context menu"
@@ -5086,14 +5100,17 @@ msgid "HE"
 msgstr "HE"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Smoke"
 msgstr "Smoke"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Decoy"
 msgstr "Decoy"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Molotov"
 msgstr "Molotov"
 
@@ -5124,6 +5141,8 @@ msgid "Own team damage"
 msgstr "Own team damage"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Strategy"
 msgstr "Strategy"
 
@@ -5937,6 +5956,7 @@ msgid "Voice"
 msgstr "Voice"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/playbook/strategy-editor.tsx
 msgid "Players"
 msgstr "Players"
 
@@ -6586,6 +6606,394 @@ msgstr "No match found yet, you have to analyze demos to generate matches."
 #: src/ui/matches/table/selected-match-count.tsx
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
 msgstr "{0, plural, one {# match selected} other {# matches selected}}"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Edit lineup"
+msgstr "Edit lineup"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Lineup name"
+msgstr "Lineup name"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Utility"
+msgstr "Utility"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Thrower"
+msgstr "Thrower"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Throw at (seconds)"
+msgstr "Throw at (seconds)"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Move throw"
+msgstr "Move throw"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Move landing"
+msgstr "Move landing"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Throw instructions"
+msgstr "Throw instructions"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Delete lineup"
+msgstr "Delete lineup"
+
+#: src/ui/playbook/lineup-details.tsx
+msgid "Source round {round} · tick {tick}"
+msgstr "Source round {round} · tick {tick}"
+
+#: src/ui/playbook/lineup-media.tsx
+msgid "View screenshot full screen"
+msgstr "View screenshot full screen"
+
+#: src/ui/playbook/lineup-media.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Remove"
+msgstr "Remove"
+
+#: src/ui/playbook/lineup-media.tsx
+msgid "Choose PNG, JPEG, WebP, MP4 or WebM files."
+msgstr "Choose PNG, JPEG, WebP, MP4 or WebM files."
+
+#: src/ui/playbook/lineup-media.tsx
+msgid "Each lineup can hold 8 files and each strategy can hold 32 MiB of media."
+msgstr "Each lineup can hold 8 files and each strategy can hold 32 MiB of media."
+
+#: src/ui/playbook/lineup-media.tsx
+msgid "Attach screenshots or clips"
+msgstr "Attach screenshots or clips"
+
+#: src/ui/playbook/playbook.tsx
+msgid "New strategy"
+msgstr "New strategy"
+
+#: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Strategy name"
+msgstr "Strategy name"
+
+#: src/ui/playbook/playbook.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Map"
+msgstr "Map"
+
+#: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Side"
+msgstr "Side"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Create strategy"
+msgstr "Create strategy"
+
+#: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Could not import this file. Choose a version 1 Playbook JSON file under 64 MiB."
+msgstr "Could not import this file. Choose a version 1 Playbook JSON file under 64 MiB."
+
+#: src/ui/playbook/playbook.tsx
+msgid "Saved locally"
+msgstr "Saved locally"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Changes unsaved"
+msgstr "Changes unsaved"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Could not save your changes. Retry or export a copy."
+msgstr "Could not save your changes. Retry or export a copy."
+
+#: src/ui/playbook/playbook.tsx
+msgid "Could not open the local Playbook."
+msgstr "Could not open the local Playbook."
+
+#: src/ui/playbook/playbook.tsx
+msgid "Retry"
+msgstr "Retry"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Loading strategies…"
+msgstr "Loading strategies…"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Strategies"
+msgstr "Strategies"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Import"
+msgstr "Import"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Build your first strategy"
+msgstr "Build your first strategy"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Pick a CS2 map, draw your team’s routes and pin the lineups you practice."
+msgstr "Pick a CS2 map, draw your team’s routes and pin the lineups you practice."
+
+#: src/ui/playbook/playbook.tsx
+msgid "Add a CS2 radar in map settings to create a strategy."
+msgstr "Add a CS2 radar in map settings to create a strategy."
+
+#: src/ui/playbook/playbook.tsx
+msgid "Search strategies"
+msgstr "Search strategies"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Search names, tags or lineups"
+msgstr "Search names, tags or lineups"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Filter by map"
+msgstr "Filter by map"
+
+#: src/ui/playbook/playbook.tsx
+msgid "All maps"
+msgstr "All maps"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Filter by side"
+msgstr "Filter by side"
+
+#: src/ui/playbook/playbook.tsx
+msgid "Both sides"
+msgstr "Both sides"
+
+#: src/ui/playbook/playbook.tsx
+msgid "No strategies match these filters."
+msgstr "No strategies match these filters."
+
+#: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Untitled strategy"
+msgstr "Untitled strategy"
+
+#. placeholder {0}: s.lineups.length
+#: src/ui/playbook/playbook.tsx
+msgid "{0, plural, one {# lineup} other {# lineups}}"
+msgstr "{0, plural, one {# lineup} other {# lineups}}"
+
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+msgid "{map} lineups"
+msgstr "{map} lineups"
+
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+msgid "Create a strategy for {map}"
+msgstr "Create a strategy for {map}"
+
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+msgid "Retry loading strategies"
+msgstr "Retry loading strategies"
+
+#: src/ui/playbook/save-demo-lineup-dialog.tsx
+msgid "Save lineup"
+msgstr "Save lineup"
+
+#: src/ui/playbook/strategy-board.tsx
+msgid "Strategy radar"
+msgstr "Strategy radar"
+
+#: src/ui/playbook/strategy-board.tsx
+msgid "Radar unavailable. Check this map in Settings."
+msgstr "Radar unavailable. Check this map in Settings."
+
+#: src/ui/playbook/strategy-board.tsx
+msgid "Scroll to zoom. Right-drag to pan."
+msgstr "Scroll to zoom. Right-drag to pan."
+
+#: src/ui/playbook/strategy-board.tsx
+msgid "Fit"
+msgstr "Fit"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Flashbang"
+msgstr "Flashbang"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "HE grenade"
+msgstr "HE grenade"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Incendiary"
+msgstr "Incendiary"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "New lineup"
+msgstr "New lineup"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Strategy exported"
+msgstr "Strategy exported"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Could not export this strategy."
+msgstr "Could not export this strategy."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click a throw or landing marker to view its lineup."
+msgstr "Click a throw or landing marker to view its lineup."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Drag a player to set their position at the current time."
+msgstr "Drag a player to set their position at the current time."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click each waypoint in order. Each step adds two seconds."
+msgstr "Click each waypoint in order. Each step adds two seconds."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click the player’s position at the current time."
+msgstr "Click the player’s position at the current time."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click where the player stands to throw."
+msgstr "Click where the player stands to throw."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click where the utility lands."
+msgstr "Click where the utility lands."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click the new throwing position."
+msgstr "Click the new throwing position."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Click the new landing position."
+msgstr "Click the new landing position."
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "All strategies"
+msgstr "All strategies"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Export"
+msgstr "Export"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Map level"
+msgstr "Map level"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Playing strategy"
+msgstr "Playing strategy"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Done"
+msgstr "Done"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Pause"
+msgstr "Pause"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Play"
+msgstr "Play"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Rewind"
+msgstr "Rewind"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Timeline"
+msgstr "Timeline"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Lineups"
+msgstr "Lineups"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Player name"
+msgstr "Player name"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Assignment"
+msgstr "Assignment"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Movement"
+msgstr "Movement"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Set position"
+msgstr "Set position"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Draw route"
+msgstr "Draw route"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Wait 2s"
+msgstr "Wait 2s"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Start"
+msgstr "Start"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Wait"
+msgstr "Wait"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Waypoint"
+msgstr "Waypoint"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Waypoint arrival time"
+msgstr "Waypoint arrival time"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Arrival time in seconds"
+msgstr "Arrival time in seconds"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Delete lineup?"
+msgstr "Delete lineup?"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Place lineup"
+msgstr "Place lineup"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Reuse lineup"
+msgstr "Reuse lineup"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Copy from another strategy…"
+msgstr "Copy from another strategy…"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "{seconds}s · P{playerNumber}"
+msgstr "{seconds}s · P{playerNumber}"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Round plan"
+msgstr "Round plan"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Delete strategy?"
+msgstr "Delete strategy?"
+
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Delete strategy"
+msgstr "Delete strategy"
 
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart title"
@@ -8817,10 +9225,6 @@ msgstr "Video generation done"
 #: src/ui/videos/video-entry.tsx
 msgid "The folder doesn't exist yet"
 msgstr "The folder doesn't exist yet"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Map"
-msgstr "Map"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Video ID"

@@ -29,6 +29,7 @@ export function InitialPageSelect() {
       context: 'Select option initial page',
       message: 'Download',
     }),
+    [Page.Playbook]: t`Playbook`,
     [Page.Teams]: t({
       context: 'Select option initial page',
       message: 'Teams',

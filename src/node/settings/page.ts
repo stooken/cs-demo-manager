@@ -4,6 +4,7 @@ export const Page = {
   Matches: 'matches',
   Players: 'players',
   Teams: 'teams',
+  Playbook: 'playbook',
 } as const;
 
 export type Page = (typeof Page)[keyof typeof Page];

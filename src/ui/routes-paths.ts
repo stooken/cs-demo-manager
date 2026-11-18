@@ -1,4 +1,5 @@
 export const RoutePath = {
+  Playbook: '/playbook',
   Demos: '/demos',
   Matches: '/matches',
   MatchHeatmap: 'heatmap',

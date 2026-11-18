@@ -11,6 +11,7 @@ import { Field, fieldClassName } from './fields';
 import { flushLibrary, loadLibrary, saveStrategy, useLibrary } from './library';
 import { newStrategy, type Strategy } from './strategy';
 import { importStrategy } from './strategy-file';
+import { PracticeTakes } from './practice-takes';
 import { StrategyEditor } from './strategy-editor';
 
 function NewStrategyDialog({
@@ -155,6 +156,8 @@ export function Playbook() {
       )}
       {!library.ready ? (
         <p className="p-16">{library.status !== 'error' && t`Loading strategies…`}</p>
+      ) : params.has('takes') ? (
+        <PracticeTakes back={() => setParams({})} />
       ) : current ? (
         <StrategyEditor
           key={current.id}
@@ -169,6 +172,9 @@ export function Playbook() {
             <h2 className="flex-1 text-title">
               <Trans>Strategies</Trans>
             </h2>
+            <Button onClick={() => setParams({ takes: '1' })}>
+              <Trans>Practice takes</Trans>
+            </Button>
             <Button onClick={() => fileInput.current?.click()}>
               <Trans>Import</Trans>
             </Button>

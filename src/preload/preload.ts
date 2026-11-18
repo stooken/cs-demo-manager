@@ -1,6 +1,7 @@
 process.env.PROCESS_NAME = 'renderer';
 import 'csdm/node/logger';
 import path from 'node:path';
+import { listPracticeTakes, readPracticeTake } from 'csdm/node/filesystem/practice-takes';
 import type {
   IpcRendererEvent,
   OpenDialogOptions,
@@ -92,6 +93,8 @@ const api: PreloadApi = {
   getVirtualDubExecutablePath: async () => {
     return Promise.resolve(getVirtualDubExecutablePath());
   },
+  listPracticeTakes,
+  readPracticeTake,
   platform: process.platform,
   isMac,
   isWindows,

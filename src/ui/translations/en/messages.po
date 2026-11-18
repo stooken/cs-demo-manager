@@ -5102,16 +5102,19 @@ msgid "HE"
 msgstr "HE"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/practice-takes.tsx
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Smoke"
 msgstr "Smoke"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/practice-takes.tsx
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Decoy"
 msgstr "Decoy"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/playbook/practice-takes.tsx
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Molotov"
 msgstr "Molotov"
@@ -6865,6 +6868,11 @@ msgid "Strategies"
 msgstr "Strategies"
 
 #: src/ui/playbook/playbook.tsx
+#: src/ui/playbook/practice-takes.tsx
+msgid "Practice takes"
+msgstr "Practice takes"
+
+#: src/ui/playbook/playbook.tsx
 msgid "Import"
 msgstr "Import"
 
@@ -6918,6 +6926,83 @@ msgstr "Untitled strategy"
 msgid "{0, plural, one {# lineup} other {# lineups}}"
 msgstr "{0, plural, one {# lineup} other {# lineups}}"
 
+#: src/ui/playbook/practice-takes.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Flashbang"
+msgstr "Flashbang"
+
+#: src/ui/playbook/practice-takes.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "HE grenade"
+msgstr "HE grenade"
+
+#: src/ui/playbook/practice-takes.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Incendiary"
+msgstr "Incendiary"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Practice take radar"
+msgstr "Practice take radar"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Recorded player"
+msgstr "Recorded player"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Add this map’s CS2 radar in map settings to see the route."
+msgstr "Add this map’s CS2 radar in map settings to see the route."
+
+#: src/ui/playbook/practice-takes.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Play"
+msgstr "Play"
+
+#: src/ui/playbook/practice-takes.tsx
+#: src/ui/playbook/strategy-editor.tsx
+msgid "Pause"
+msgstr "Pause"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Take timeline"
+msgstr "Take timeline"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Pitch"
+msgstr "Pitch"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Yaw"
+msgstr "Yaw"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Could not read the practice folder."
+msgstr "Could not read the practice folder."
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Choose a valid Playbook .take.json file under 32 MiB."
+msgstr "Choose a valid Playbook .take.json file under 32 MiB."
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "All practice takes"
+msgstr "All practice takes"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Back to strategies"
+msgstr "Back to strategies"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Open take file"
+msgstr "Open take file"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "Refresh"
+msgstr "Refresh"
+
+#: src/ui/playbook/practice-takes.tsx
+msgid "In practice chat, use .record followed by a name, then .stoprecord to save your take. Use .play to replay it on a bot."
+msgstr "In practice chat, use .record followed by a name, then .stoprecord to save your take. Use .play to replay it on a bot."
+
 #: src/ui/playbook/save-demo-lineup-dialog.tsx
 msgid "{map} lineups"
 msgstr "{map} lineups"
@@ -6949,18 +7034,6 @@ msgstr "Scroll to zoom. Right-drag to pan."
 #: src/ui/playbook/strategy-board.tsx
 msgid "Fit"
 msgstr "Fit"
-
-#: src/ui/playbook/strategy-editor.tsx
-msgid "Flashbang"
-msgstr "Flashbang"
-
-#: src/ui/playbook/strategy-editor.tsx
-msgid "HE grenade"
-msgstr "HE grenade"
-
-#: src/ui/playbook/strategy-editor.tsx
-msgid "Incendiary"
-msgstr "Incendiary"
 
 #: src/ui/playbook/strategy-editor.tsx
 msgid "New lineup"
@@ -7037,14 +7110,6 @@ msgstr "Playing strategy"
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Done"
 msgstr "Done"
-
-#: src/ui/playbook/strategy-editor.tsx
-msgid "Pause"
-msgstr "Pause"
-
-#: src/ui/playbook/strategy-editor.tsx
-msgid "Play"
-msgstr "Play"
 
 #: src/ui/playbook/strategy-editor.tsx
 msgid "Rewind"

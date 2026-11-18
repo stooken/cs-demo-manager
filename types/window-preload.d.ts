@@ -28,6 +28,8 @@ import type { getImageInformation } from 'csdm/node/filesystem/get-image-informa
 
 declare global {
   interface PreloadApi {
+    listPracticeTakes: () => Promise<string[]>;
+    readPracticeTake: (name: string) => Promise<string>;
     logger: ILogger;
     platform: NodeJS.Platform;
     isWindows: boolean;
